@@ -3,10 +3,10 @@ def get_page_html(form_data):
     page_html="""<!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>Database Web-App Demo</title>
+        <title>About us</title>
     </head>
     <body>
-        <h1>Page 1B - Hello, World!</h1>
+        <h1>About this website</h1>
         <p>This is the first dynamically generated page!</p>
         <p><a href="/">Go to Page 1A</a></p>
         <p><a href="/page2a">Go to Page 2A</a></p>
