@@ -95,7 +95,7 @@ def get_page_html(form_data):
 <body>
 
 <header>
-    <img src="images/rmit.png" alt="Logo">
+    <img src="rmit.png" alt="Logo">
     <nav>
         <a href="#">Home</a>
         <a href="#">Dashboard</a>
