@@ -1,31 +1,50 @@
 import pyhtml
 def get_page_html(form_data):
-    print("About to return page 2")
-    
     page_html=f"""<!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>Reading from a .db file</title>
+        <meta charset="UTF-8">
+        <title>Climate Metric</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Page 2B - Example of retrieving data from a .db file...</h1>
-    """
-    sql_query = "select * from movie;"
-    page_html+= f"<h2>Result from \"{sql_query}\"</h2>"
-    
-    #Run the query in sql_query and get the results
-    results = pyhtml.get_results_from_query("database/movies.db",sql_query)
-    
-    #Adding results to the web page without any beautification. Try turning it into a nice table!
-    for row in results:
-        page_html+="<p>"+str(row)+"</p>\n"
-    page_html+="""
-        <p><a href="/">Go to Page 1A</a></p>
-        <p><a href="/page2a">Go to Page 2A</a></p>
-        <p><a href="/page3a">Go to Page 3A</a></p>
-        <p><a href="/page1b">Go to Page 1B</a></p>
-        <p><a href="/page2b">Go to Page 2B</a></p>
-        <p><a href="/page3b">Go to Page 3B</a></p>
+        <header>
+        <a href="/"><img src="rmit.png" alt="Logo"></a>
+        <ul>
+            <li><a href="/page2a">Page 2A</a></li>
+            <li><a href="/page3a">Page 3A</a></li>
+            <li><a href="/page1b">About Us</a></li>
+            <li><a href="/page2b">Climate Metric</a></li>
+            <li><a href="/page3b">Page 3B</a></li>
+        </ul>
+        </header>
+        <div class="container">
+            <aside class="sidebar">
+                <h3>Search Climate Metric</h3>
+
+                <label>Metric:</label>
+                <select>
+                    <option value="temp">Temperature</option>
+                    <option value="rain">Rainfall</option>
+                </select>
+
+                <label>Station ID:</label>
+                <select>
+                    <option value="temp">Temperature</option>
+                    <option value="rain">Rainfall</option>
+                </select>
+
+                <label>Year Range:</label>
+                <input type="text" name="year_range" placeholder="1970-2020">
+                <input type="text" name="year_range" placeholder="1970-2020">
+
+                <button>Apply</button>
+            </aside>
+
+            <main class="main">
+            
+            </main>
+        </div>
     </body>
     </html>
     """
