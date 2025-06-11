@@ -41,25 +41,28 @@ h2 {
     color: #0077b6;
 }
 .about {
-    background-color: greenyellow;
+    background: greenyellow;
     height: 50vh;
     font-size: 18px;
 }
 
 .members {
-    width: 50%;
+    width: 100%;
+    height: 30vh;
+    justify-content: space-between;
+    background: blanchedalmond;
+    text-align: center;
     display: flex;
 }
-.member h3 {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 30px;
+.members p {
+    font-size: 15px
 }
+
 .personas {
     width: 50%;
-    background-color: white;
+    height: 30vh;
+    background: blanchedalmond;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    justify-content: space-between;
 }

@@ -1,3 +1,4 @@
+import pyhtml
 def get_page_html(form_data):
     print("About to return page home page...")
     page_html="""<!DOCTYPE html>
@@ -36,9 +37,17 @@ def get_page_html(form_data):
 
         <section class="members">
         <h3>Team Members</h3>
-
+        """
+    sql_members = "select * from member;"
+    members = pyhtml.get_results_from_query("database\climate.db",sql_members)
+    for i in members:
+        print(i)
+        page_html += f"\n<p>Student_number: {str(i[0])} Name: {str(i[1])} {str(i[2])}</p>"
+    page_html += """
         <div class="personas">
         <h3>personas</h3>
+        <p>key personas for this website are:</p>
+        <p>key personas for this website are:</p>
         </div>
         </section>
         </main>
