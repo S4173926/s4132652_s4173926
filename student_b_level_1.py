@@ -18,6 +18,7 @@ def get_page_html(form_data):
             <li><a href="/page3b">Page 3B</a></li>
         </ul>
         </header>
+        
         <main>
         <section class="about">
         <p><a href="/">Home</a> > <a href="/page1b">About us</a></p>
@@ -31,6 +32,14 @@ def get_page_html(form_data):
         <p>To use this webiste, you can find methods at the top of the page,
         and you can click the links to navigate to different pages. After you in searching page
         you can searching state, climate metric or specific thing you looking for.</p>
+        </section>
+
+        <section class="members">
+        <h3>Team Members</h3>
+
+        <div class="personas">
+        <h3>personas</h3>
+        </div>
         </section>
         </main>
     </body>
