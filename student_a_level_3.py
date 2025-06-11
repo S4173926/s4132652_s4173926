@@ -1,189 +1,189 @@
-import pyhtml
-
 def get_page_html(form_data):
-    print("About to return page 3")
+    print("Rendering Level 3A layout...")
 
     page_html = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Page 3A - Forms, Databases and Advanced Queries</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: #0d47a1;
-            color: white;
-        }
+    <html lang="en">
+    <head>
+        <title>Identify Similar Weather Stations</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(to bottom, #005b96, #003f63);
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                color: white;
+            }
+            header {
+                background: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+            header img {
+                height: 50px;
+            }
+            nav {
+                display: flex;
+                gap: 15px;
+            }
+            nav a {
+                color: #004080;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            h1 {
+                text-align: center;
+                margin: 40px 0 25px;
+                font-size: 2.2em;
+                color: #ffffff;
+            }
+            .filters {
+                background-color: rgba(255,255,255,0.1);
+                width: 85%;
+                margin: 0 auto 30px auto;
+                padding: 25px;
+                border-radius: 16px;
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            .filters div {
+                display: flex;
+                flex-direction: column;
+                min-width: 180px;
+            }
+            .filters label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #ffffff;
+            }
+            .filters select, .filters input {
+                padding: 10px;
+                border-radius: 8px;
+                border: none;
+                background: #e0efff;
+                color: #002244;
+                font-weight: bold;
+            }
+            .filters button {
+                margin-top: 22px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 8px;
+                background-color: #0077cc;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            table {
+                width: 85%;
+                margin: 0 auto 40px auto;
+                border-collapse: collapse;
+                border-radius: 12px;
+                overflow: hidden;
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(4px);
+            }
+            thead {
+                background-color: rgba(255,255,255,0.2);
+            }
+            th, td {
+                padding: 14px 12px;
+                text-align: left;
+                color: #ffffff;
+            }
+            tbody tr:nth-child(even) td {
+                background-color: rgba(255,255,255,0.08);
+            }
+            footer {
+                margin-top: auto;
+                background-color: #f0f8ff;
+                text-align: center;
+                padding: 20px;
+                font-size: 0.9em;
+                color: #333;
+                border-top: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
 
-        header {
-            background-color: #1565c0;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        <header>
+            <img src="images/rmit.png" alt="RMIT Logo">
+            <nav>
+                <a href="/page1a">Page 1A</a>
+                <a href="/page2a">Page 2A</a>
+                <a href="/page3a">Page 3A</a>
+                <a href="/page1b">Page 1B</a>
+                <a href="/page2b">Page 2B</a>
+                <a href="/page3b">Page 3B</a>
+                <a href="/help">HELP</a>
+            </nav>
+        </header>
 
-        .logo {
-            height: 50px;
-        }
+        <h1>Identify Similar Weather Stations</h1>
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        form {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            margin: 30px;
-            border-radius: 12px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        select, input[type="submit"] {
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            font-size: 1rem;
-        }
-
-        select {
-            min-width: 180px;
-        }
-
-        input[type="submit"] {
-            background-color: #64b5f6;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #42a5f5;
-        }
-
-        table {
-            width: 90%;
-            margin: 0 auto 40px auto;
-            border-collapse: collapse;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #90caf9;
-            color: white;
-        }
-
-        th {
-            background-color: #1565c0;
-        }
-
-        tr:hover {
-            background-color: rgba(255,255,255,0.05);
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
-        <div class="nav-links">
-            <a href="/">Page 1A</a>
-            <a href="/page2a">Page 2A</a>
-            <a href="/page3a">Page 3A</a>
-            <a href="/page1b">Page 1B</a>
-            <a href="/page2b">Page 2B</a>
-            <a href="/page3b">Page 3B</a>
-        </div>
-    </header>
-
-    <h1>Identify Similar Weather Stations</h1>
-
-    <form action="/page3a" method="GET">
-        <div>
-            <label for="var_star">Movie Star</label>
-            <select name="var_star" multiple>"""
-
-    query = "select * from star;"
-    results = pyhtml.get_results_from_query("database/movies.db", query)
-    var_star = form_data.get('var_star')
-
-    if var_star:
-        var_star = [int(star) for star in var_star]
-
-    for row in results:
-        page_html += f'<option value="{row[0]}"'
-        if var_star and row[0] == var_star[0]:
-            page_html += ' selected="selected"'
-        page_html += f'>{row[1]}</option>'
-
-    page_html += """</select>
-        </div>"""
-
-    page_html += """
-        <div>
-            <label for="var_movie">Movie</label>
-            <select name="var_movie" """
-
-    if var_star:
-        query = f"""
-        SELECT movie.mvnumb, movie.mvtitle 
-        FROM movie 
-        JOIN movstar ON movie.mvnumb = movstar.mvnumb 
-        WHERE movstar.starnumb = {var_star[0]};
-        """
-        results = pyhtml.get_results_from_query("database/movies.db", query)
-        page_html += ">"
-        for row in results:
-            page_html += f'<option value="{row[0]}">{row[1]}</option>'
-    else:
-        page_html += 'disabled><option>Choose a star</option>'
-
-    page_html += """</select>
+        <div class="filters">
+            <div>
+                <label>Time Periods</label>
+                <select><option>2005 to 2015</option></select>
+            </div>
+            <div>
+                <label>Reference Station</label>
+                <select><option>Melbourne Airport</option></select>
+            </div>
+            <div>
+                <label>Number of Stations</label>
+                <input type="number" value="2">
+            </div>
+            <div>
+                <label>&nbsp;</label>
+                <button>FIND</button>
+            </div>
         </div>
 
-        <input type="submit" value="Show starred movies">
-    </form>"""
+        <table>
+            <thead>
+                <tr>
+                    <th>Weather Station</th>
+                    <th>Average Temp (2005–2009)</th>
+                    <th>Average Temp (2010–2015)</th>
+                    <th>% Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Melbourne Airport (selected)</td>
+                    <td>22.5 °C</td>
+                    <td>22.7 °C</td>
+                    <td>+0.38%</td>
+                </tr>
+                <tr>
+                    <td>Ballarat</td>
+                    <td>17.2 °C</td>
+                    <td>17.6 °C</td>
+                    <td>+0.23%</td>
+                </tr>
+                <tr>
+                    <td>Bendigo</td>
+                    <td>16.9°C</td>
+                    <td>17.0°C</td>
+                    <td>0.29%</td>
+                </tr>
+            </tbody>
+        </table>
 
-    # Optional result table
-    page_html += """
-    <table>
-        <tr><th>Movie Star</th><th>Movie</th></tr>
-        <tr><td>Sample Star</td><td>Sample Movie</td></tr>
-    </table>
-</body>
-</html>
-"""
+        <footer>
+            <p>FAQ: For more info visit our <a href="/faq">FAQ Page</a>.</p>
+        </footer>
+
+    </body>
+    </html>
+    """
     return page_html

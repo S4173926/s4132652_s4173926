@@ -1,129 +1,188 @@
-import pyhtml
-
 def get_page_html(form_data):
-    print("About to return page 2")
+    print("Rendering Level 2A layout...")
 
-    sql_query = "SELECT * FROM movie;"
-    results = pyhtml.get_results_from_query("database/movies.db", sql_query)
+    page_html = """<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Focused Climate View</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(to bottom, #F9D47A, #F7B547);
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                background: white;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            nav a {
+                margin-left: 15px;
+                text-decoration: none;
+                font-weight: bold;
+                color: #004080;
+            }
+            h1 {
+                text-align: center;
+                color: #003366;
+                margin: 40px 0 20px;
+                font-size: 1.9em;
+            }
+            .filters {
+                background-color: #FFF8E4;
+                width: 85%;
+                margin: 0 auto 30px auto;
+                padding: 20px;
+                border-radius: 16px;
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            .filters div {
+                display: flex;
+                flex-direction: column;
+            }
+            .filters label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .filters select, .filters input {
+                padding: 8px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                min-width: 150px;
+            }
+            table {
+                width: 85%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            thead {
+                background-color: #004643;
+                color: white;
+            }
+            th, td {
+                padding: 12px;
+                text-align: left;
+            }
+            tbody tr:nth-child(even) td {
+                background-color: #FFFBEF;
+            }
+            .region-header {
+                background-color: #004643;
+                color: white;
+                padding: 10px;
+                font-weight: bold;
+            }
+            footer {
+                text-align: center;
+                background-color: #f0f8ff;
+                padding: 20px;
+                font-size: 0.9em;
+                color: #333;
+                border-top: 1px solid #ccc;
+                margin-top: auto;
+            }
+        </style>
+    </head>
+    <body>
 
-    page_html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reading from a .db file</title>
-    <style>
-        body {{
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: #ffe082;
-            color: #333;
-        }}
+        <header>
+            <img src="images/rmit.png" height="50" alt="RMIT Logo">
+            <nav>
+                <a href="/page1a">Page 1A</a>
+                <a href="/page2a">Page 2A</a>
+                <a href="/page3a">Page 3A</a>
+                <a href="/page1b">Page 1B</a>
+                <a href="/page2b">Page 2B</a>
+                <a href="/page3b">Page 3B</a>
+                <a href="/help">HELP</a>
+            </nav>
+        </header>
 
-        header {{
-            background-color: #1565c0;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }}
+        <h1>Focused View of Climate Change by Weather Station</h1>
 
-        .logo {{
-            height: 50px;
-        }}
-
-        .nav-links {{
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }}
-
-        .nav-links a {{
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-        }}
-
-        .nav-links a:hover {{
-            text-decoration: underline;
-        }}
-
-        h1 {{
-            text-align: center;
-            margin-top: 30px;
-            color: #0d47a1;
-        }}
-
-        .content {{
-            padding: 20px 40px;
-        }}
-
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-        }}
-
-        th, td {{
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }}
-
-        th {{
-            background-color: #004d40;
-            color: white;
-        }}
-
-        tr:hover {{
-            background-color: #f1f1f1;
-        }}
-    </style>
-</head>
-<body>
-    <header>
-        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
-        <div class="nav-links">
-            <a href="/">Page 1a</a>
-            <a href="/page2a">Page 2a</a>
-            <a href="/page3a">Page 3a</a>
-            <a href="/page1b">Page 1b</a>
-            <a href="/page2b">Page 2b</a>
-            <a href="/page3b">Page 3b</a>
+        <div class="filters">
+            <div>
+                <label>State:</label>
+                <select><option>Western Australia</option></select>
+            </div>
+            <div>
+                <label>Start Latitude:</label>
+                <input type="text" value="-20.00">
+            </div>
+            <div>
+                <label>End Latitude:</label>
+                <input type="text" value="-17.00">
+            </div>
+            <div>
+                <label>Climate Metric:</label>
+                <select><option>Maximum Temp</option></select>
+            </div>
         </div>
-    </header>
 
-    <h1>Page 2A - Example of retrieving data from a .db file</h1>
-
-    <div class="content">
-        <h2>Results from: <code>{sql_query}</code></h2>
+        <div class="region-header">Western Australia</div>
         <table>
-            <tr>"""
-    
-    # Add table headers
-    if results:
-        for col in range(len(results[0])):
-            page_html += f"<th>Column {col+1}</th>"
-        page_html += "</tr>"
-
-        # Add table rows
-        for row in results:
-            page_html += "<tr>"
-            for cell in row:
-                page_html += f"<td>{cell}</td>"
-            page_html += "</tr>"
-    else:
-        page_html += "<td colspan='100%'>No results found</td></tr>"
-
-    page_html += """
+            <thead>
+                <tr>
+                    <th>Site Name</th>
+                    <th>Region</th>
+                    <th>Latitude</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Broome Airport</td>
+                    <td>Broome</td>
+                    <td>-17.95</td>
+                </tr>
+                <tr>
+                    <td>Derby Aero</td>
+                    <td>Derby West Kimberley</td>
+                    <td>-17.37</td>
+                </tr>
+            </tbody>
         </table>
-    </div>
-</body>
-</html>
-"""
+
+        <div class="region-header">Western Australia</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Number Weather Stations</th>
+                    <th>Average Max Temperature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Broome</td>
+                    <td>2</td>
+                    <td>27.2</td>
+                </tr>
+                <tr>
+                    <td>Derby West Kimberley</td>
+                    <td>1</td>
+                    <td>23.1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer>
+            <p>FAQ: For more info visit our <a href="/faq">FAQ Page</a>.</p>
+        </footer>
+
+    </body>
+    </html>
+    """
     return page_html

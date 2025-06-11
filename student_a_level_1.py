@@ -1,122 +1,148 @@
 def get_page_html(form_data):
+    print("About to return page home page...")
     page_html = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Database Web-App Demo</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            background-color: #e3f2fd;
-            color: #333;
-        }
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather Data Summary</title>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(to bottom, #d9ecf8, #ffffff);
+                display: flex;
+                flex-direction: column;
+            }
 
-        header {
-            background-color: #1565c0;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: white;
+                padding: 10px 20px;
+                box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            }
 
-        .logo {
-            height: 50px;
-        }
+            header img {
+                height: 50px;
+            }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+            nav {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-        }
+            nav a {
+                text-decoration: none;
+                color: #004080;
+                font-weight: bold;
+            }
 
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
+            h1 {
+                text-align: center;
+                font-size: 2.5em;
+                color: #003366;
+                margin: 30px 0 10px 0;
+            }
 
-        h1 {
-            text-align: center;
-            margin: 30px 0 10px 0;
-            color: #0d47a1;
-        }
+            main {
+                display: flex;
+                justify-content: space-around;
+                margin: 30px 20px 60px 20px;
+                text-align: center;
+            }
 
-        .weather-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 10px 20px 30px 20px;
-            padding: 10px;
-        }
+            .box {
+                flex: 1;
+                margin: 0 10px;
+                border-radius: 15px;
+                padding: 25px 15px;
+                color: #4b4b4b;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                min-width: 180px;
+            }
 
-        .weather-box {
-            flex: 1;
-            min-width: 200px;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            color: #333;
-        }
+            .year { background-color: #cfeafd; }
+            .temp { background-color: #ffd08a; }
+            .rain { background-color: #ffd4da; }
+            .stations { background-color: #c6f1d6; }
 
-        .year { background-color: #bbdefb; }
-        .temp { background-color: #ffe082; }
-        .rain { background-color: #f8bbd0; }
-        .stations { background-color: #c8e6c9; }
+            .box img {
+                height: 40px;
+                margin-bottom: 10px;
+            }
 
-        .weather-box h2 {
-            margin-top: 0;
-            font-size: 1.1rem;
-        }
+            .box h2 {
+                font-size: 1.1em;
+                margin: 10px 0;
+                color: #444;
+            }
 
-        .weather-box p {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+            .box p {
+                font-size: 1.7em;
+                font-weight: bold;
+                color: #202020;
+                margin: 5px 0;
+            }
+
+            footer {
+                background-color: #f0f8ff;
+                text-align: center;
+                padding: 20px;
+                font-size: 0.9em;
+                color: #333;
+                border-top: 1px solid #ccc;
+                margin-top: auto;
+            }
+        </style>
+    </head>
+    <body>
+
     <header>
-        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
-        <div class="nav-links">
-            <a href="/">Page 1A</a>
+        <img src="images/rmit.png" alt="RMIT Logo">
+        <nav>
+            <a href="/page1a">Page 1A</a>
             <a href="/page2a">Page 2A</a>
             <a href="/page3a">Page 3A</a>
             <a href="/page1b">Page 1B</a>
             <a href="/page2b">Page 2B</a>
             <a href="/page3b">Page 3B</a>
-        </div>
+            <a href="/help">HELP</a>
+        </nav>
     </header>
 
     <h1>WEATHER DATA</h1>
 
-    <div class="weather-container">
-        <div class="weather-box year">
+    <main>
+        <div class="box year">
+            <img src="images/icon-calendar.png" alt="Calendar Icon">
             <h2>YEAR RANGE</h2>
             <p>2000–2023</p>
         </div>
-        <div class="weather-box temp">
+        <div class="box temp">
+            <img src="images/icon-thermometer.png" alt="Thermometer Icon">
             <h2>LOWEST TEMPERATURE</h2>
-            <p>–45.6°C</p>
+            <p>−45.6°C</p>
         </div>
-        <div class="weather-box rain">
+        <div class="box rain">
+            <img src="images/icon-rain.png" alt="Rain Icon">
             <h2>HIGHEST RAINFALL</h2>
             <p>480.2 mm</p>
         </div>
-        <div class="weather-box stations">
+        <div class="box stations">
+            <img src="images/icon-map.png" alt="Map Icon">
             <h2>MOST WEATHER STATIONS</h2>
             <p>Northwest</p>
         </div>
-    </div>
-</body>
-</html>
-"""
+    </main>
+
+    <footer>
+        <p>FAQ: For more information, please contact support or visit our <a href="/faq">FAQ page</a>.</p>
+    </footer>
+
+    </body>
+    </html>
+    """
     return page_html
