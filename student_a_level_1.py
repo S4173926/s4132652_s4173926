@@ -3,148 +3,119 @@ def get_page_html(form_data):
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jason Chen's Climate Dashboard</title>
+    <title>Database Web-App Demo</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            background-color: #f8f9fa;
+            background-color: #e3f2fd;
             color: #333;
         }
+
         header {
-            background: linear-gradient(to right, #0077b6, #00b4d8);
-            color: white;
-            padding: 15px 30px;
+            background-color: #1565c0;
+            padding: 10px 30px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        header img {
-            height: 45px;
+
+        .logo {
+            height: 50px;
         }
-        nav a {
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
             color: white;
-            margin-right: 20px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
         }
-        nav a:hover {
+
+        .nav-links a:hover {
             text-decoration: underline;
         }
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 20px;
-            padding: 20px 30px;
+
+        h1 {
+            text-align: center;
+            margin: 30px 0 10px 0;
+            color: #0d47a1;
         }
-        .sidebar, .main {
-            background-color: white;
+
+        .weather-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 10px 20px 30px 20px;
+            padding: 10px;
+        }
+
+        .weather-box {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .sidebar h3, .main h2 {
-            color: #0077b6;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #00b4d8;
-            border: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0096c7;
-        }
-        .map, .trend-chart, .summary-chart {
-            background-color: #edf6f9;
-            border: 2px dashed #90e0ef;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
             text-align: center;
+            color: #333;
         }
-        .highlight {
-            background-color: #ff6b6b;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 10px;
+
+        .year { background-color: #bbdefb; }
+        .temp { background-color: #ffe082; }
+        .rain { background-color: #f8bbd0; }
+        .stations { background-color: #c8e6c9; }
+
+        .weather-box h2 {
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .weather-box p {
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <img src="images/rmit.png" alt="Logo">
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Maps</a>
-        <a href="#">Reports</a>
-        <a href="#">About</a>
-        <a href="#">Profile</a>
-    </nav>
-</header>
-
-<div class="container">
-    <aside class="sidebar">
-        <h3>Search City / LGA</h3>
-        <p><strong>Temperature:</strong> 18°C</p>
-        <p><strong>Rainfall:</strong> 10mm</p>
-
-        <label>Suburb:</label>
-        <input type="text" name="suburb">
-
-        <label>Year Range:</label>
-        <input type="text" name="year_range" placeholder="1970-2020">
-
-        <label>Data Type:</label>
-        <select name="data_type">
-            <option value="temp">Temperature</option>
-            <option value="rain">Rainfall</option>
-        </select>
-
-        <button>Apply</button>
-
-        <div class="summary-chart">
-            <p><strong>Summary Chart Placeholder</strong></p>
+    <header>
+        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
+        <div class="nav-links">
+            <a href="/">Page 1A</a>
+            <a href="/page2a">Page 2A</a>
+            <a href="/page3a">Page 3A</a>
+            <a href="/page1b">Page 1B</a>
+            <a href="/page2b">Page 2B</a>
+            <a href="/page3b">Page 3B</a>
         </div>
-    </aside>
+    </header>
 
-    <main class="main">
-        <h2>Map of Urban Zones</h2>
-        <div class="map">
-            <p class="highlight">High Heatwave Risk</p>
-            <p>[Urban zone map with heat risk areas]</p>
+    <h1>WEATHER DATA</h1>
+
+    <div class="weather-container">
+        <div class="weather-box year">
+            <h2>YEAR RANGE</h2>
+            <p>2000–2023</p>
         </div>
-
-        <h2>Climate Trends</h2>
-        <div class="trend-chart">
-            <p>[Climate trend chart placeholder]</p>
+        <div class="weather-box temp">
+            <h2>LOWEST TEMPERATURE</h2>
+            <p>–45.6°C</p>
         </div>
-    </main>
-</div>
-
+        <div class="weather-box rain">
+            <h2>HIGHEST RAINFALL</h2>
+            <p>480.2 mm</p>
+        </div>
+        <div class="weather-box stations">
+            <h2>MOST WEATHER STATIONS</h2>
+            <p>Northwest</p>
+        </div>
+    </div>
 </body>
 </html>
 """

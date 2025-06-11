@@ -1,101 +1,189 @@
-
-
 import pyhtml
+
 def get_page_html(form_data):
     print("About to return page 3")
-    #Create the top part of the webpage
-    #Note that the drop down list ('select' HTML element) has been given the name "var_star"
-    #We will use this same name in our code further below to obtain what the user selected.
-    page_html="""<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>Page 3A - Forms, databases and advanced queries</title>
-    </head>
-    <body>
-        <h1>Welcome to Page 3a!</h1>
-        <p>List the movies based on the star</p>
-        <form action="/page3a" method="GET">
-        
-          <label for="var_star">Movie Star</label>
-          <select name="var_star" multiple>"""
-    #Before you read further, play around with the web-page and note how selecting a star name from the first
-    #drop down list populates the second drop down list with the movies in which they have featured.
-    
-    #Note that although we see the name of the movie star in the first drop down list, when a star is selected and submitted,
-    #our program receives the star's ID (primary key).
-    
-    ################################ Movie star drop down list is generated below ######################################
-          
 
-    #Put the query together.
+    page_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page 3A - Forms, Databases and Advanced Queries</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #0d47a1;
+            color: white;
+        }
+
+        header {
+            background-color: #1565c0;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 30px;
+            border-radius: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, input[type="submit"] {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        select {
+            min-width: 180px;
+        }
+
+        input[type="submit"] {
+            background-color: #64b5f6;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #42a5f5;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto 40px auto;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #90caf9;
+            color: white;
+        }
+
+        th {
+            background-color: #1565c0;
+        }
+
+        tr:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
+        <div class="nav-links">
+            <a href="/">Page 1A</a>
+            <a href="/page2a">Page 2A</a>
+            <a href="/page3a">Page 3A</a>
+            <a href="/page1b">Page 1B</a>
+            <a href="/page2b">Page 2B</a>
+            <a href="/page3b">Page 3B</a>
+        </div>
+    </header>
+
+    <h1>Identify Similar Weather Stations</h1>
+
+    <form action="/page3a" method="GET">
+        <div>
+            <label for="var_star">Movie Star</label>
+            <select name="var_star" multiple>"""
+
     query = "select * from star;"
-    
-    #Run the query on the movies.db in the 'database' folder and get the results
-    #Note that all results are in the str data type first, even if they had different types in the database.
-    results = pyhtml.get_results_from_query("database/movies.db",query)
-    
-    #Get the value or values in the HTML dropdown list that we named "var_star" or None no data was sent through.
-    #If the user selects multiple movie stars on the web_page, we will have multiple values.
+    results = pyhtml.get_results_from_query("database/movies.db", query)
     var_star = form_data.get('var_star')
-    
-    print("var_star selected on webpage is: ",var_star)
-    
-    #If the user had selected one or more stars on the web-page, convert their IDs to int
-    if(var_star!=None):
-        #Take the list of strings and convert the items to ints
+
+    if var_star:
         var_star = [int(star) for star in var_star]
-    
-    #Create the drop down list of movie stars
+
     for row in results:
-        #row[0] is the ID/primary key of the movie stars
-        page_html+='<option value="'+str(row[0])+'"'
-        #If there was a previous selection of a star on the web page, have them selected by default to be user-friendly.
-        if var_star!=None and row[0]==var_star[0]:
-            page_html+=' selected="selected"'
-            
-        #row[1] is the name of the star, which is what the user sees in the drop down list.
-        page_html+='>'+str(row[1])+'</option>'
-        
-    page_html+="</select><br><br>"
+        page_html += f'<option value="{row[0]}"'
+        if var_star and row[0] == var_star[0]:
+            page_html += ' selected="selected"'
+        page_html += f'>{row[1]}</option>'
 
+    page_html += """</select>
+        </div>"""
 
+    page_html += """
+        <div>
+            <label for="var_movie">Movie</label>
+            <select name="var_movie" """
 
-    ################################ Movies drop down list is generated below ##########################################
-    
-    page_html+="""<label for="var_movie">Movie</label>
-    <select name="var_movie" """
-
-    #We create this drop down list only if a movie star was chosen
-    if var_star!=None:
-        #Query for getting the list of movie IDs and their titles by star
-        query ="""SELECT movie.mvnumb, movie.mvtitle 
+    if var_star:
+        query = f"""
+        SELECT movie.mvnumb, movie.mvtitle 
         FROM movie 
-        JOIN movstar ON movie.mvnumb = movstar.mvnumb """
-        query+=f"WHERE movstar.starnumb = {var_star[0]};"
-
-        #Run query and get results
-        results = pyhtml.get_results_from_query("database/movies.db",query)
-        page_html+=" >"
-        #row[0] is the movie ID (primary key) and row[1] is the movie title
+        JOIN movstar ON movie.mvnumb = movstar.mvnumb 
+        WHERE movstar.starnumb = {var_star[0]};
+        """
+        results = pyhtml.get_results_from_query("database/movies.db", query)
+        page_html += ">"
         for row in results:
-            page_html+='<option value="'+str(row[0])+'"\>'+str(row[1])+'</option>'
+            page_html += f'<option value="{row[0]}">{row[1]}</option>'
     else:
-        #If no movie star was chosen, we create a dummy list and make it disabled so the user sees the movie drop down
-        #but they can't access it.
-        page_html+="disabled>"
-        page_html+='<option>Choose a star</option>'
-    page_html+="</select><br><br>"
+        page_html += 'disabled><option>Choose a star</option>'
 
-    page_html+="""
-    <input type="submit" value="Show starred movies">
-    </form>
-        <p><a href="/">Go to Page 1A</a></p>
-        <p><a href="/page2a">Go to Page 2A</a></p>
-        <p><a href="/page3a">Go to Page 3A</a></p>
-        <p><a href="/page1b">Go to Page 1B</a></p>
-        <p><a href="/page2b">Go to Page 2B</a></p>
-        <p><a href="/page3b">Go to Page 3B</a></p>
-    </body>
-    </html>
-    """
+    page_html += """</select>
+        </div>
+
+        <input type="submit" value="Show starred movies">
+    </form>"""
+
+    # Optional result table
+    page_html += """
+    <table>
+        <tr><th>Movie Star</th><th>Movie</th></tr>
+        <tr><td>Sample Star</td><td>Sample Movie</td></tr>
+    </table>
+</body>
+</html>
+"""
     return page_html

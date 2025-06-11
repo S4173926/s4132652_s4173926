@@ -2,176 +2,127 @@ import pyhtml
 
 def get_page_html(form_data):
     print("About to return page 2")
-    
-    # SQL query example
+
     sql_query = "SELECT * FROM movie;"
     results = pyhtml.get_results_from_query("database/movies.db", sql_query)
 
-    # Start HTML with style
     page_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Policy Planning Tool - Jason Chen</title>
+    <title>Reading from a .db file</title>
     <style>
         body {{
             font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f9fb;
             margin: 0;
-            padding: 0;
+            background-color: #ffe082;
+            color: #333;
         }}
+
         header {{
-            background: linear-gradient(to right, #0077b6, #00b4d8);
-            padding: 15px 30px;
-            color: white;
+            background-color: #1565c0;
+            padding: 10px 30px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }}
-        nav a {{
-            margin: 0 12px;
+
+        .logo {{
+            height: 50px;
+        }}
+
+        .nav-links {{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }}
+
+        .nav-links a {{
             color: white;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
         }}
-        nav a:hover {{
+
+        .nav-links a:hover {{
             text-decoration: underline;
         }}
-        .container {{
-            padding: 30px;
+
+        h1 {{
+            text-align: center;
+            margin-top: 30px;
+            color: #0d47a1;
         }}
-        .flex-row {{
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
+
+        .content {{
+            padding: 20px 40px;
         }}
-        .input-box {{
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }}
-        label {{
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-        }}
-        input, select {{
+
+        table {{
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }}
-        .section-title {{
-            font-size: 1.2em;
-            color: #0077b6;
-            margin-top: 25px;
-        }}
-        .chart, .map {{
-            background: #e9f5f9;
-            padding: 20px;
-            border: 2px dashed #90e0ef;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 15px;
-        }}
-        .button-row {{
-            margin-top: 25px;
-            text-align: center;
-        }}
-        .button-row button {{
-            margin: 0 10px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #00b4d8;
-            color: white;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }}
-        .button-row button:hover {{
-            background-color: #0096c7;
-        }}
-        .table {{
-            margin-top: 20px;
             border-collapse: collapse;
-            width: 100%;
-            background: white;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
         }}
-        .table th, .table td {{
-            padding: 10px;
-            border: 1px solid #ddd;
+
+        th, td {{
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }}
-        .table th {{
-            background-color: #caf0f8;
-            color: #03045e;
+
+        th {{
+            background-color: #004d40;
+            color: white;
+        }}
+
+        tr:hover {{
+            background-color: #f1f1f1;
         }}
     </style>
 </head>
 <body>
-
-<header>
-    <div><strong>LOGO</strong></div>
-    <nav>
-        <a href="#">HOME</a>
-        <a href="#">DASHBOARD</a>
-        <a href="#">MAPS</a>
-        <a href="#">REPORTS</a>
-        <a href="#">POLICY TOOL</a>
-        <a href="#">Profile</a>
-    </nav>
-</header>
-
-<div class="container">
-    <div class="flex-row">
-        <div class="input-box">
-            <label>Select Zone:</label>
-            <input type="text" placeholder="Suburb Name">
-
-            <div class="section-title">Zone Climate (Summary)</div>
-            <ul>
-                <li>Hot Summers</li>
-                <li>Variable Rainfall</li>
-                <li>Occasional Storms</li>
-            </ul>
+    <header>
+        <img src="images/rmit.png" alt="RMIT Logo" class="logo">
+        <div class="nav-links">
+            <a href="/">Page 1a</a>
+            <a href="/page2a">Page 2a</a>
+            <a href="/page3a">Page 3a</a>
+            <a href="/page1b">Page 1b</a>
+            <a href="/page2b">Page 2b</a>
+            <a href="/page3b">Page 3b</a>
         </div>
+    </header>
 
-        <div class="input-box">
-            <label>Select Scenario:</label>
-            <select>
-                <option>2030</option>
-                <option>2050</option>
-                <option>2070</option>
-            </select>
-            <button style="margin-top: 10px;">Next</button>
+    <h1>Page 2A - Example of retrieving data from a .db file</h1>
 
-            <div class="section-title">Future Projection</div>
-            <div class="chart">[Projection Graph Placeholder]</div>
-        </div>
-    </div>
+    <div class="content">
+        <h2>Results from: <code>{sql_query}</code></h2>
+        <table>
+            <tr>"""
+    
+    # Add table headers
+    if results:
+        for col in range(len(results[0])):
+            page_html += f"<th>Column {col+1}</th>"
+        page_html += "</tr>"
 
-    <div class="section-title">Map: Sea Level Rise + Heat Zones</div>
-    <div class="map">[Urban Zone Map Placeholder]</div>
-
-    <div class="button-row">
-        <button>&larr; Back</button>
-        <button>Generate Report</button>
-        <button>Save Template</button>
-    </div>
-
-    <div class="section-title">Data Preview from DB (mock example)</div>
-    <table class="table">
-        <tr><th>ID</th><th>Title</th><th>Genre</th></tr>
-    """
-    for row in results:
-        page_html += f"<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>\n"
+        # Add table rows
+        for row in results:
+            page_html += "<tr>"
+            for cell in row:
+                page_html += f"<td>{cell}</td>"
+            page_html += "</tr>"
+    else:
+        page_html += "<td colspan='100%'>No results found</td></tr>"
 
     page_html += """
-    </table>
-</div>
-
+        </table>
+    </div>
 </body>
 </html>
 """
