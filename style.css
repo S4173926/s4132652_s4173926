@@ -1,0 +1,25 @@
+.top-div{
+    background: greenyellow;
+    display : flex;
+}
+
+header {
+    background: linear-gradient(to right, #0077b6, #00b4d8);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+header li{
+    display: inline;
+}
+header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+header a:hover {
+    text-decoration: underline;
+}
