@@ -5,7 +5,7 @@ def get_page_html(form_data):
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>About us</title>
+        <title>About Us</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -14,15 +14,15 @@ def get_page_html(form_data):
         <ul>
             <li><a href="/page2a">Page 2A</a></li>
             <li><a href="/page3a">Page 3A</a></li>
-            <li><a href="/page1b">About us</a></li>
-            <li><a href="/page2b">Page 2B</a></li>
+            <li><a href="/page1b">About Us</a></li>
+            <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Page 3B</a></li>
         </ul>
         </header>
         
         <main>
         <section class="about">
-        <p><a href="/">Home</a> > <a href="/page1b">About us</a></p>
+        <p><a href="/">Home</a> > <a href="/page1b">About Us</a></p>
         <h1>About this website</h1>
         <p>As those years climate change becomes to a big proble that people need to face in everday. 
         In this website, we aim to help people understand the impact of climate change
@@ -39,7 +39,7 @@ def get_page_html(form_data):
         <h3>Team Members</h3>
         """
     sql_members = "select * from member;"
-    members = pyhtml.get_results_from_query("database\climate.db",sql_members)
+    members = pyhtml.get_results_from_query("climate.db",sql_members)
     for i in members:
         print(i)
         page_html += f"\n<p>Student_number: {str(i[0])} Name: {str(i[1])} {str(i[2])}</p>"
