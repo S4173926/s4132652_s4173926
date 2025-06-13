@@ -1,6 +1,24 @@
 import pyhtml
 
 def get_page_html(form_data):
+    station_id = form_data.get('station_min')
+    if station_id is None:
+        station_id = "1000" 
+    station_id_max = form_data.get('station_max')
+    if station_id_max is None:
+        station_id_max = "300010"
+    date_min = form_data.get('datemin')
+    if date_min is None:
+        date_min = "1970-01-01"
+    date_max = form_data.get('datemax')
+    if date_max is None:
+        date_max = "2020-12-31"
+    weather_metric = form_data.get('weather_Metric')
+    if weather_metric is None:
+        weather_metric = "Precipitation"
+    print("Station ID range:", station_id, "to", station_id_max, 
+          "Date range:", date_min, "to", date_max, 
+          "Weather Metric:", weather_metric)
     page_html=f"""<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -89,7 +107,23 @@ def get_page_html(form_data):
             </aside>
 
             <main class="main">
-            
+            <table>
+                <tr>
+                    <th>Station ID</th>
+                    <th>Date</th>
+                    <th>{weather_metric}</th>
+                </tr>"""
+    searching = f"select location, DMY, {weather_metric} from weather_data where location >= {station_id} and location <= {station_id_max} and DMY >= '{date_min}' and DMY <= '{date_max}';"
+    data = pyhtml.get_results_from_query("climate.db", searching)
+    for row in data:
+                page_html += f"""
+                <tr>
+                    <td>{row[0]}</td>
+                    <td>{row[1]}</td>
+                    <td>{row[2]}</td>
+                </tr>\n"""
+    page_html += f"""
+            </table>
             </main>
         </div>
     </body>
