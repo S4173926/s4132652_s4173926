@@ -1,4 +1,5 @@
 import pyhtml
+import datetime
 
 def get_page_html(form_data):
     station_id = form_data.get('station_min')
@@ -8,7 +9,7 @@ def get_page_html(form_data):
          station_id = station_id[0]
     station_id_max = form_data.get('station_max')
     if station_id_max is None:
-        station_id_max = "300010"
+        station_id_max = "2000"
     else:
          station_id_max = station_id_max[0]
     date_min = form_data.get('datemin')
@@ -29,6 +30,10 @@ def get_page_html(form_data):
     print("Station ID range:", station_id, "to", station_id_max, 
           "Date range:", date_min, "to", date_max, 
           "Weather Metric:", weather_metric)
+    start_date = datetime.datetime.strptime(date_min, "%Y-%m-%d")
+    start_date = start_date.date()
+    end_date = datetime.datetime.strptime(date_max, "%Y-%m-%d")
+    end_date = end_date.date()
     page_html=f"""<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -54,12 +59,12 @@ def get_page_html(form_data):
                 <form action="/page2b" method="GET">
 
                 <label>Station ID(1000~300010):</label>
-                <input type="text" name="station_min" min="1000" max="300010" value="1000">
-                <input type="text" name="station_max" min="1000" max="300010" value="300010">
+                <input type="text" name="station_min" min="1000" max="300010" placeholder="1000">
+                <input type="text" name="station_max" min="1000" max="300010" placeholder="300010">
 
                 <label>Date(01/01/1970~31/12/2020):</label>
-                <input type="date" name="datemin" min="1970-01-01" max="2020-12-31" value="{date_min}">
-                <input type="date" name="datemax" min="1970-01-01" max="2020-12-31" value="{date_max}">
+                <input type="date" name="datemin" min="1970-01-01" max="2020-12-31" placeholder="{date_min}">
+                <input type="date" name="datemax" min="1970-01-01" max="2020-12-31" placeholder="{date_max}">
 
                 <label>Metric:</label>
                 <select name="weather_Metric" id="weather-attributes">
@@ -123,15 +128,22 @@ def get_page_html(form_data):
                     <th>Date</th>
                     <th>{weather_metric}</th>
                 </tr>"""
-    searching = f"select location, DMY, {weather_metric} from weather_data where location >= {station_id} and location <= {station_id_max} and DMY between '{date_min}' and '{date_max}';"
+    searching = f"select location, DMY, {weather_metric} from weather_data where location >= {station_id} and location <= {station_id_max};"
     data = pyhtml.get_results_from_query("climate.db", searching)
     for row in data:
-                page_html += f"""
-                <tr>
-                    <td>{row[0]}</td>
-                    <td>{row[1]}</td>
-                    <td>{row[2]}</td>
-                </tr>\n"""
+                date_in_range = row[1]
+                date_in_range = date_in_range.split('/')
+                date_in_range.reverse()
+                date_in_range = '-'.join(date_in_range)
+                date_in_range = datetime.datetime.strptime(date_in_range, "%Y-%m-%d")
+                date_in_range = date_in_range.date()
+                if start_date <= date_in_range <= end_date:
+                    page_html += f"""
+                    <tr>
+                        <td>{row[0]}</td>
+                        <td>{row[1]}</td>
+                        <td>{row[2]}</td>
+                    </tr>\n"""
     page_html += f"""
             </table>
             </main>
@@ -139,4 +151,5 @@ def get_page_html(form_data):
     </body>
     </html>
     """
+    print("Start date:", start_date, "End date:", end_date)
     return page_html
