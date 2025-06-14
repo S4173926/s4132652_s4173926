@@ -12,7 +12,7 @@ def get_page_html(form_data):
         date_min = "1970-01-01"
     date_max = form_data.get('datemax')
     if date_max is None:
-        date_max = "2020-12-31"
+        date_max = "1970-01-02"
     weather_metric = form_data.get('weather_Metric')
     if weather_metric is None:
         weather_metric = "Precipitation"
