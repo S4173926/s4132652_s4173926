@@ -1,45 +1,50 @@
 def get_page_html(form_data):
-    print("Rendering Level 2A layout...")
-
     page_html = """<!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>Focused Climate View</title>
+        <title>Focused View of Climate Change</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
-                background: linear-gradient(to bottom, #F9D47A, #F7B547);
+                background: linear-gradient(to bottom, #005b96, #003f63);
                 margin: 0;
                 padding: 0;
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
+                color: white;
             }
             header {
+                background: white;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 padding: 10px 20px;
-                background: white;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+            header img {
+                height: 50px;
+            }
+            nav {
+                display: flex;
+                gap: 15px;
             }
             nav a {
-                margin-left: 15px;
-                text-decoration: none;
-                font-weight: bold;
                 color: #004080;
+                font-weight: bold;
+                text-decoration: none;
             }
             h1 {
                 text-align: center;
-                color: #003366;
-                margin: 40px 0 20px;
-                font-size: 1.9em;
+                margin: 40px 0 25px;
+                font-size: 2.1em;
+                color: #ffffff;
             }
             .filters {
-                background-color: #FFF8E4;
+                background-color: rgba(255,255,255,0.1);
                 width: 85%;
                 margin: 0 auto 30px auto;
-                padding: 20px;
+                padding: 25px;
                 border-radius: 16px;
                 display: flex;
                 justify-content: space-between;
@@ -49,16 +54,20 @@ def get_page_html(form_data):
             .filters div {
                 display: flex;
                 flex-direction: column;
+                min-width: 180px;
             }
             .filters label {
                 font-weight: bold;
                 margin-bottom: 5px;
+                color: white;
             }
             .filters select, .filters input {
-                padding: 8px;
+                padding: 10px;
                 border-radius: 8px;
-                border: 1px solid #ccc;
-                min-width: 150px;
+                border: none;
+                background: #e0efff;
+                color: #002244;
+                font-weight: bold;
             }
             table {
                 width: 85%;
@@ -66,42 +75,47 @@ def get_page_html(form_data):
                 border-collapse: collapse;
                 border-radius: 12px;
                 overflow: hidden;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(4px);
             }
             thead {
-                background-color: #004643;
-                color: white;
+                background-color: rgba(255,255,255,0.2);
             }
             th, td {
-                padding: 12px;
+                padding: 14px 12px;
                 text-align: left;
+                color: white;
             }
             tbody tr:nth-child(even) td {
-                background-color: #FFFBEF;
+                background-color: rgba(255,255,255,0.08);
             }
             .region-header {
-                background-color: #004643;
+                background-color: rgba(255,255,255,0.2);
                 color: white;
-                padding: 10px;
+                padding: 10px 20px;
+                width: 85%;
+                margin: 0 auto;
                 font-weight: bold;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
             }
             footer {
-                text-align: center;
+                margin-top: auto;
                 background-color: #f0f8ff;
+                text-align: center;
                 padding: 20px;
                 font-size: 0.9em;
                 color: #333;
                 border-top: 1px solid #ccc;
-                margin-top: auto;
             }
         </style>
     </head>
     <body>
 
         <header>
-            <img src="images/rmit.png" height="50" alt="RMIT Logo">
+            <img src="images/rmit.png" alt="RMIT Logo">
             <nav>
-                <a href="/page1a">Page 1A</a>
+                <a href="/">Page 1A</a>
                 <a href="/page2a">Page 2A</a>
                 <a href="/page3a">Page 3A</a>
                 <a href="/page1b">Page 1B</a>
@@ -120,7 +134,7 @@ def get_page_html(form_data):
             </div>
             <div>
                 <label>Start Latitude:</label>
-                <input type="text" value="-20.00">
+                <input type="text" value={start_lat}>
             </div>
             <div>
                 <label>End Latitude:</label>

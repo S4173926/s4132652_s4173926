@@ -1,5 +1,4 @@
 def get_page_html(form_data):
-    print("About to return page home page...")
     page_html = """<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -10,7 +9,7 @@ def get_page_html(form_data):
                 height: 100%;
                 margin: 0;
                 font-family: Arial, sans-serif;
-                background: linear-gradient(to bottom, #d9ecf8, #ffffff);
+                background: linear-gradient(to bottom, #005b96, #003f63);
                 display: flex;
                 flex-direction: column;
             }
@@ -43,7 +42,7 @@ def get_page_html(form_data):
             h1 {
                 text-align: center;
                 font-size: 2.5em;
-                color: #003366;
+                color: white;
                 margin: 30px 0 10px 0;
             }
 
@@ -52,22 +51,19 @@ def get_page_html(form_data):
                 justify-content: space-around;
                 margin: 30px 20px 60px 20px;
                 text-align: center;
+                flex-wrap: wrap;
             }
 
             .box {
                 flex: 1;
-                margin: 0 10px;
+                margin: 10px;
                 border-radius: 15px;
                 padding: 25px 15px;
-                color: #4b4b4b;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                color: #ffffff;
+                background-color: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
                 min-width: 180px;
             }
-
-            .year { background-color: #cfeafd; }
-            .temp { background-color: #ffd08a; }
-            .rain { background-color: #ffd4da; }
-            .stations { background-color: #c6f1d6; }
 
             .box img {
                 height: 40px;
@@ -77,13 +73,13 @@ def get_page_html(form_data):
             .box h2 {
                 font-size: 1.1em;
                 margin: 10px 0;
-                color: #444;
+                color: #ffffff;
             }
 
             .box p {
                 font-size: 1.7em;
                 font-weight: bold;
-                color: #202020;
+                color: #ffffff;
                 margin: 5px 0;
             }
 
@@ -103,7 +99,7 @@ def get_page_html(form_data):
     <header>
         <img src="images/rmit.png" alt="RMIT Logo">
         <nav>
-            <a href="/page1a">Page 1A</a>
+            <a href="/">Page 1A</a>
             <a href="/page2a">Page 2A</a>
             <a href="/page3a">Page 3A</a>
             <a href="/page1b">Page 1B</a>

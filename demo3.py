@@ -6,6 +6,7 @@ import student_a_level_3
 import student_b_level_1
 import student_b_level_2
 import student_b_level_3
+import page_help
 
 pyhtml.need_debugging_help=True
 
@@ -16,6 +17,7 @@ pyhtml.MyRequestHandler.pages["/page3a"]=student_a_level_3; #Page to show when s
 pyhtml.MyRequestHandler.pages["/page1b"]=student_b_level_1; #Page to show when someone accesses "http://localhost/page1b"
 pyhtml.MyRequestHandler.pages["/page2b"]=student_b_level_2; #Page to show when someone accesses "http://localhost/page2b"
 pyhtml.MyRequestHandler.pages["/page3b"]=student_b_level_3; #Page to show when someone accesses "http://localhost/page3b"
+pyhtml.MyRequestHandler.pages["/help"]= page_help
 
 #Host the site!
 pyhtml.host_site()

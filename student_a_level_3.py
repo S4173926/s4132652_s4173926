@@ -1,6 +1,4 @@
 def get_page_html(form_data):
-    print("Rendering Level 3A layout...")
-
     page_html = """<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -39,8 +37,8 @@ def get_page_html(form_data):
             h1 {
                 text-align: center;
                 margin: 40px 0 25px;
-                font-size: 2.2em;
-                color: #ffffff;
+                font-size: 2.1em;
+                color: #003366;
             }
             .filters {
                 background-color: rgba(255,255,255,0.1);
@@ -117,7 +115,7 @@ def get_page_html(form_data):
         <header>
             <img src="images/rmit.png" alt="RMIT Logo">
             <nav>
-                <a href="/page1a">Page 1A</a>
+                <a href="/">Page 1A</a>
                 <a href="/page2a">Page 2A</a>
                 <a href="/page3a">Page 3A</a>
                 <a href="/page1b">Page 1B</a>
