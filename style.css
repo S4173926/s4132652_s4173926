@@ -101,25 +101,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-button:hover {
-    background-color: #0096c7;
-}
-.map, .trend-chart, .summary-chart {
-    background-color: #edf6f9;
-    border: 2px dashed #90e0ef;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
-    text-align: center;
-}
-.highlight {
-    background-color: #ff6b6b;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-bottom: 10px;
-}
+
 label {
     display: block;
     margin-top: 10px;

@@ -16,13 +16,12 @@ def get_page_html(form_data):
             <li><a href="/page3a">Page 3A</a></li>
             <li><a href="/page1b">About Us</a></li>
             <li><a href="/page2b">Climate Metric</a></li>
-            <li><a href="/page3b">Page 3B</a></li>
+            <li><a href="/page3b">Exploring Climate</a></li>
         </ul>
         </header>
         
         <main>
         <section class="about">
-        <p><a href="/">Home</a> > <a href="/page1b">About Us</a></p>
         <h1>About this website</h1>
         <p>As those years climate change becomes to a big proble that people need to face in everday. 
         In this website, we aim to help people understand the impact of climate change
