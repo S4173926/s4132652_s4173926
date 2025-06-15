@@ -42,29 +42,14 @@ def get_page_html(form_data):
         for row in state_rows
     )
 
-    # Step 5: Build metric dropdown
+    # Step 5: Build metric dropdown using column names
     metric_columns = [
         "MaxTemp", "MinTemp", "Precipitation", "Evaporation", "Sunshine",
         "Humid00", "Humid03", "Humid06", "Humid09", "Humid12", "Humid15", "Humid18", "Humid21",
         "Okta00", "Okta03", "Okta06", "Okta09", "Okta12", "Okta15", "Okta18"
     ]
-    metric_labels = {
-    "MaxTemp": "Maximum Temperature (°C)",
-    "MinTemp": "Minimum Temperature (°C)",
-    "Precipitation": "Precipitation (mm)",
-    "Evaporation": "Evaporation (mm)",
-    "Sunshine": "Sunshine (hours)",
-    "Humid00": "Humidity at 00:00 (%)", "Humid03": "Humidity at 03:00 (%)",
-    "Humid06": "Humidity at 06:00 (%)", "Humid09": "Humidity at 09:00 (%)",
-    "Humid12": "Humidity at 12:00 (%)", "Humid15": "Humidity at 15:00 (%)",
-    "Humid18": "Humidity at 18:00 (%)", "Humid21": "Humidity at 21:00 (%)",
-    "Okta00": "Cloud Cover at 00:00 (oktas)", "Okta03": "Cloud Cover at 03:00 (oktas)",
-    "Okta06": "Cloud Cover at 06:00 (oktas)", "Okta09": "Cloud Cover at 09:00 (oktas)",
-    "Okta12": "Cloud Cover at 12:00 (oktas)", "Okta15": "Cloud Cover at 15:00 (oktas)",
-    "Okta18": "Cloud Cover at 18:00 (oktas)"
-    }
     metric_dropdown_html = "\n".join(
-        f'<option value="{m}" {"selected" if metric == m else ""}>{metric_labels.get(m, m)}</option>'
+        f'<option value="{m}" {"selected" if metric == m else ""}>{m}</option>'
         for m in metric_columns
     )
 
@@ -81,7 +66,7 @@ def get_page_html(form_data):
 
     # Final HTML
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang=\"en\">
 <head>
     <title>Focused View of Climate Change</title>
     <style>
@@ -191,49 +176,49 @@ def get_page_html(form_data):
 <body>
 
     <header>
-        <img src="images/rmit.png" alt="RMIT Logo">
+        <img src=\"rmit.png\" alt=\"RMIT Logo\">
         <nav>
-            <a href="/">Page 1A</a>
-            <a href="/page2a">Page 2A</a>
-            <a href="/page3a">Page 3A</a>
-            <a href="/page1b">Page 1B</a>
-            <a href="/page2b">Page 2B</a>
-            <a href="/page3b">Page 3B</a>
-            <a href="/help">HELP</a>
+            <a href=\"/\">Page 1A</a>
+            <a href=\"/page2a\">Page 2A</a>
+            <a href=\"/page3a\">Page 3A</a>
+            <a href=\"/page1b\">Page 1B</a>
+            <a href=\"/page2b\">Page 2B</a>
+            <a href=\"/page3b\">Page 3B</a>
+            <a href=\"/help\">HELP</a>
         </nav>
     </header>
 
     <h1>Focused View of Climate Change by Weather Station</h1>
 
-    <form method="get" action="/page2a">
-    <div class="filters">
+    <form method=\"get\" action=\"/page2a\">
+    <div class=\"filters\">
         <div>
-            <label for="state">State:</label>
-            <select name="state">
+            <label for=\"state\">State:</label>
+            <select name=\"state\">
                 {state_dropdown_html}
             </select>
         </div>
         <div>
             <label>Start Latitude:</label>
-            <input type="text" name="lat_start" value="{lat_start}">
+            <input type=\"text\" name=\"lat_start\" value=\"{lat_start}\">
         </div>
         <div>
             <label>End Latitude:</label>
-            <input type="text" name="lat_end" value="{lat_end}">
+            <input type=\"text\" name=\"lat_end\" value=\"{lat_end}\">
         </div>
         <div>
             <label>Climate Metric:</label>
-            <select name="metric">
+            <select name=\"metric\">
                 {metric_dropdown_html}
             </select>
         </div>
         <div>
-            <button type="submit">Filter</button>
+            <button type=\"submit\">Filter</button>
         </div>
     </div>
     </form>
 
-    <div class="region-header">{state}</div>
+    <div class=\"region-header\">{state}</div>
     <table>
         <thead>
             <tr><th>Site Name</th><th>Region</th><th>Latitude</th></tr>
@@ -241,7 +226,7 @@ def get_page_html(form_data):
         <tbody>{station_table}</tbody>
     </table>
 
-    <div class="region-header">{state}</div>
+    <div class=\"region-header\">{state}</div>
     <table>
         <thead>
             <tr><th>Region</th><th>Number Weather Stations</th><th>Average {metric}</th></tr>
@@ -250,7 +235,7 @@ def get_page_html(form_data):
     </table>
 
     <footer>
-        <p>FAQ: For more info visit our <a href="/faq">FAQ Page</a>.</p>
+        <p>FAQ: For more info visit our <a href=\"/faq\">FAQ Page</a>.</p>
     </footer>
 
 </body>
