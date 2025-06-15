@@ -38,8 +38,8 @@ def get_page_html(form_data):
                 <input type="number" name="start_year" min="1970" max="2020" placeholder="2005">
                 <label>End Year(1970-2020):</label>
                 <input type="number" name="end_year" min="1970" max="2020" placeholder="2015">
-                <label>Years period:</label>
-                <select name="years_period">
+                <label>Years grouped:</label>
+                <select name="years_grouped">
                     <option value="5">half decades</option>
                     <option value="1">per Year</option>
                     <option value="2">half total Years</option>
@@ -80,8 +80,8 @@ def get_page_html(form_data):
                     <option value="12">December</option>
                     <option value="__">All</option>
                 </select>
-                <label>Month period:</label>
-                <select name="month_period">
+                <label>Month grouped:</label>
+                <select name="month_grouped">
                     <option value="1">per Month</option>
                     <option value="2">half years</option>
                     <option value="3">quarters</option>
