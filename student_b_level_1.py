@@ -1,15 +1,24 @@
 import pyhtml
+
 def get_page_html(form_data):
-    print("About to return page home page...")
-    page_html="""<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>About Us</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
+    print("About to return home page...")
+
+    # Fetch members and personas from the database
+    sql_members = "SELECT * FROM member;"
+    members = pyhtml.get_results_from_query("climate.db", sql_members)
+    sql_personas = "SELECT * FROM personas;"
+    personas = pyhtml.get_results_from_query("climate.db", sql_personas)
+
+    # Start building HTML
+    page_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
         <a href="/"><img src="rmit.png" alt="Logo"></a>
         <ul>
             <li><a href="/page2a">Page 2A</a></li>
@@ -18,39 +27,69 @@ def get_page_html(form_data):
             <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Exploring Climate</a></li>
         </ul>
-        </header>
-        
-        <main>
+    </header>
+    <main>
         <section class="about">
-        <h1>About this website</h1>
-        <p>As those years climate change becomes to a big proble that people need to face in everday. 
-        In this website, we aim to help people understand the impact of climate change
-          on urban areas, particularly focusing on heatwaves and rainfall patterns by using
-            data and support people who need tracking current climate change data.
-        </p>
-        <h2>How to use this website</h2>
-        <p>To use this webiste, you can find methods at the top of the page,
-        and you can click the links to navigate to different pages. After you in searching page
-        you can searching state, climate metric or specific thing you looking for.</p>
+            <h1>About this website</h1>
+            <p>
+                Climate change has become a significant problem that people face every day.
+                This website aims to help people understand the impact of climate change
+                on urban areas, particularly focusing on heatwaves and rainfall patterns,
+                by using data to support those who need to track current climate change data.
+            </p>
+            <h2>How to use this website</h2>
+            <p>
+                Use the navigation links at the top of the page to explore different features.
+                You can search by state, climate metric, or other specific criteria on the search pages.
+            </p>
         </section>
 
         <section class="members">
-        <h3>Team Members</h3>
-        """
-    sql_members = "select * from member;"
-    members = pyhtml.get_results_from_query("climate.db",sql_members)
-    for i in members:
-        print(i)
-        page_html += f"\n<p>Student_number: {str(i[0])} Name: {str(i[1])} {str(i[2])}</p>"
-    page_html += """
-        <div class="personas">
-        <h3>personas</h3>
-        <p>key personas for this website are:</p>
-        <p>key personas for this website are:</p>
-        </div>
-        </section>
-        </main>
-    </body>
-    </html>
+            <h3>Team Members</h3>
+            <ul>
     """
+
+    # Add team members
+    for member in members:
+        student_number, first_name, last_name = member[:3]
+        page_html += f"<li>Student Number: {student_number} - {first_name} {last_name}</li>\n"
+
+    page_html += """
+            </ul>
+            <div class="personas">
+                <h3>Personas</h3>
+    """
+
+    # Add personas
+    for persona in personas:
+        _, name, age, background, goals, needs = persona[:6]
+        goals_list = [g.strip() for g in goals.split("*") if g.strip()]
+        needs_list = [n.strip() for n in needs.split("*") if n.strip()]
+        page_html += f"""
+                <div class="persona">
+                    <p><strong>{name}</strong> (Age: {age})<br>Background: {background}</p>
+                    <ul>
+                        <li><strong>Goals:</strong></li>
+        """
+        for goal in goals_list:
+            page_html += f"<li>{goal}</li>"
+        page_html += """
+                    </ul>
+                    <ul>
+                        <li><strong>Needs:</strong></li>
+        """
+        for need in needs_list:
+            page_html += f"<li>{need}</li>"
+        page_html += """
+                    </ul>
+                </div>
+        """
+
+    page_html += """
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+"""
     return page_html
