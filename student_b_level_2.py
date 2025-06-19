@@ -179,14 +179,23 @@ def get_page_html(form_data):
                 date_in_range = date_in_range.date()
                 if start_date <= date_in_range <= end_date:
                     filtered_data.append(row)
-    filtered_data.sort(key=lambda x: datetime.datetime.strptime(x[1], "%d/%m/%Y"))
+    token = {}
     for row in filtered_data:
-                    page_html += f"""
-                    <tr>
-                        <td>{row[0]}</td>
-                        <td>{row[1]}</td>
-                        <td>{row[2]}</td>
-                    </tr>\n"""
+        if row[0] not in token:
+            token[row[0]] = []
+        token[row[0]].append(row)
+        
+
+    #filtered_data.sort(key=lambda x: datetime.datetime.strptime(x[1], "%d/%m/%Y"))
+    for key, rows in token.items():
+        rows.sort(key=lambda x: datetime.datetime.strptime(x[1], "%d/%m/%Y"))
+        for row in rows:
+            page_html += f"""
+            <tr>
+                <td>{row[0]}</td>
+                <td>{row[1]}</td>
+                <td>{row[2]}</td>
+            </tr>\n"""
     page_html += f"""
             </table>
 
