@@ -1,110 +1,135 @@
 def get_page_html(form_data):
     page_html = """<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Help | Weather Data Web App</title>
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background: linear-gradient(to bottom, #005b96, #003f63);
-                color: white;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Help | Weather Data Web App</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
 
-            header {
-                background: white;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px 20px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            }
+        header {
+            background: linear-gradient(to right, #0077b6, #00b4d8);
+            color: white;
+            height: 12vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
 
-            header img {
-                height: 50px;
-            }
+        header img {
+            height: 40px;
+        }
 
-            nav {
-                display: flex;
-                gap: 15px;
-            }
+        header ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
 
-            nav a {
-                color: #004080;
-                font-weight: bold;
-                text-decoration: none;
-            }
+        header li {
+            margin: 0 10px;
+        }
 
-            h1 {
-                text-align: center;
-                margin: 40px 0 20px;
-                font-size: 2.3em;
-                color: #ffffff;
-            }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-            .content {
-                background-color: rgba(255,255,255,0.08);
-                width: 80%;
-                margin: 0 auto;
-                padding: 25px 30px;
-                border-radius: 12px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                font-size: 1.1em;
-            }
+        header a:hover {
+            text-decoration: underline;
+        }
 
-            .content p {
-                margin: 15px 0;
-                line-height: 1.6;
-            }
+        h1 {
+            text-align: center;
+            margin: 30px 0 20px;
+            font-size: 2.4em;
+            color: #0077b6;
+        }
 
-            .content strong {
-                color: #ffffff;
-            }
+        .content {
+            width: 80%;
+            margin: 0 auto;
+            background: #f1f9ff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+        }
 
-            footer {
-                margin-top: auto;
-                background-color: #f0f8ff;
-                text-align: center;
-                padding: 20px;
-                font-size: 0.9em;
-                color: #333;
-                border-top: 1px solid #ccc;
-            }
-        </style>
-    </head>
-    <body>
+        .content p {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
 
-        <header>
-            <img src="images/rmit.png" alt="RMIT Logo">
-            <nav>
-                <a href="/">Page 1A</a>
-                <a href="/page2a">Page 2A</a>
-                <a href="/page3a">Page 3A</a>
-                <a href="/page1b">Page 1B</a>
-                <a href="/page2b">Page 2B</a>
-                <a href="/page3b">Page 3B</a>
-                <a href="/help">HELP</a>
-            </nav>
-        </header>
+        .content a {
+            color: #0077b6;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-        <h1>Help & Support</h1>
+        .content a:hover {
+            text-decoration: underline;
+        }
 
-        <div class="content">
-            <p>If you need assistance using this weather data application, feel free to reach out:</p>
-            <p><strong>Phone:</strong> (04) 248 4379</p>
-            <p><strong>Email:</strong> <a href="mailto:s4132652@student.rmit.edu.au" style="color: #add8ff;">s4132652@student.rmit.edu.au</a></p>
-            <p>This site is developed for educational purposes as part of the INTE/COSC unit at RMIT University. For technical support or questions about the data, contact the developer using the information above.</p>
-        </div>
+        footer {
+            margin-top: auto;
+            background: linear-gradient(to right, #0077b6, #00b4d8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
 
-        <footer>
-            <p>FAQ: For more information, please visit our <a href="/faq">FAQ page</a>.</p>
-        </footer>
+        footer a {
+            color: #ffeb3b;
+            text-decoration: underline;
+        }
 
-    </body>
-    </html>
-    """
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/rmit.png" alt="RMIT Logo">
+    <ul>
+        <li><a href="/">Page 1A</a></li>
+        <li><a href="/page2a">Page 2A</a></li>
+        <li><a href="/page3a">Page 3A</a></li>
+        <li><a href="/page1b">Page 1B</a></li>
+        <li><a href="/page2b">Page 2B</a></li>
+        <li><a href="/page3b">Page 3B</a></li>
+        <li><a href="/help">HELP</a></li>
+    </ul>
+</header>
+
+<h1>Help & Support</h1>
+
+<div class="content">
+    <p>If you need assistance using this weather data application, feel free to reach out:</p>
+    <p><strong>Phone:</strong> (04) 248 4379</p>
+    <p><strong>Email:</strong> <a href="mailto:s4132652@student.rmit.edu.au">s4132652@student.rmit.edu.au</a></p>
+    <p>This site is developed for educational purposes as part of the INTE/COSC unit at RMIT University. For technical support or questions about the data, contact the developer using the information above.</p>
+</div>
+
+<footer>
+    <p>FAQ: For more information, please visit our <a href="/faq">FAQ page</a>.</p>
+</footer>
+
+</body>
+</html>
+"""
     return page_html

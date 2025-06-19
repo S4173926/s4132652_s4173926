@@ -42,7 +42,7 @@ def get_page_html(form_data):
         for row in state_rows
     )
 
-    # Step 5: Build metric dropdown using column names
+    # Step 5: Build metric dropdown
     metric_columns = [
         "MaxTemp", "MinTemp", "Precipitation", "Evaporation", "Sunshine",
         "Humid00", "Humid03", "Humid06", "Humid09", "Humid12", "Humid15", "Humid18", "Humid21",
@@ -64,48 +64,66 @@ def get_page_html(form_data):
         for region, count, avg_temp in summary_rows
     ) or "<tr><td colspan='3'>No summary available</td></tr>"
 
-    # Final HTML
     return f"""<!DOCTYPE html>
-<html lang=\"en\">
+<html lang='en'>
 <head>
+    <meta charset='UTF-8'>
     <title>Focused View of Climate Change</title>
     <style>
-        body {{
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #005b96, #003f63);
+        html, body {{
+            height: 100%;
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+            color: #333;
         }}
         header {{
-            background: white;
+            background: linear-gradient(to right, #0077b6, #00b4d8);
+            color: white;
+            height: 12vh;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            justify-content: space-between;
+            padding: 0 20px;
         }}
-        header img {{ height: 50px; }}
-        nav {{ display: flex; gap: 15px; }}
-        nav a {{ color: #004080; font-weight: bold; text-decoration: none; }}
+        header img {{
+            height: 40px;
+        }}
+        header ul {{
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }}
+        header li {{
+            margin: 0 10px;
+        }}
+        header a {{
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }}
+        header a:hover {{
+            text-decoration: underline;
+        }}
         h1 {{
             text-align: center;
-            margin: 40px 0 25px;
-            font-size: 2.1em;
+            margin-top: 30px;
+            font-size: 2.4em;
+            color: #0077b6;
         }}
         .filters {{
-            background-color: rgba(255,255,255,0.1);
             width: 85%;
             margin: 0 auto 30px auto;
             padding: 25px;
-            border-radius: 16px;
+            border-radius: 12px;
+            background: #f1f9ff;
             display: flex;
             justify-content: space-between;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 20px;
         }}
         .filters div {{
             display: flex;
@@ -115,128 +133,118 @@ def get_page_html(form_data):
         .filters label {{
             font-weight: bold;
             margin-bottom: 5px;
-            color: white;
         }}
         .filters select, .filters input {{
             padding: 10px;
             border-radius: 8px;
-            border: none;
-            background: #e0efff;
-            color: #002244;
-            font-weight: bold;
+            border: 1px solid #ccc;
         }}
         .filters button {{
             margin-top: auto;
             padding: 10px 20px;
-            font-weight: bold;
-            background: #004080;
+            background: #0077b6;
             color: white;
             border: none;
             border-radius: 8px;
+            font-weight: bold;
         }}
         table {{
             width: 85%;
             margin: 20px auto;
             border-collapse: collapse;
-            border-radius: 12px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(4px);
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }}
-        thead {{ background-color: rgba(255,255,255,0.2); }}
         th, td {{
-            padding: 14px 12px;
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
             text-align: left;
-            color: white;
         }}
-        tbody tr:nth-child(even) td {{
-            background-color: rgba(255,255,255,0.08);
-        }}
+        th {{ background-color: #e0f3ff; color: #003f63; }}
         .region-header {{
-            background-color: rgba(255,255,255,0.2);
-            color: white;
+            background-color: #e0f3ff;
+            color: #003f63;
             padding: 10px 20px;
             width: 85%;
             margin: 0 auto;
             font-weight: bold;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
+            border-radius: 6px 6px 0 0;
         }}
         footer {{
-            margin-top: auto;
-            background-color: #f0f8ff;
+            background: linear-gradient(to right, #0077b6, #00b4d8);
+            color: white;
             text-align: center;
             padding: 20px;
             font-size: 0.9em;
-            color: #333;
-            border-top: 1px solid #ccc;
+            margin-top: auto;
         }}
+        footer a {{ color: #ffeb3b; text-decoration: underline; }}
     </style>
 </head>
 <body>
 
-    <header>
-        <img src=\"rmit.png\" alt=\"RMIT Logo\">
-        <nav>
-            <a href=\"/\">Page 1A</a>
-            <a href=\"/page2a\">Page 2A</a>
-            <a href=\"/page3a\">Page 3A</a>
-            <a href=\"/page1b\">Page 1B</a>
-            <a href=\"/page2b\">Page 2B</a>
-            <a href=\"/page3b\">Page 3B</a>
-            <a href=\"/help\">HELP</a>
-        </nav>
-    </header>
+<header>
+    <img src='rmit.png' alt='RMIT Logo'>
+    <ul>
+        <li><a href='/'>Page 1A</a></li>
+        <li><a href='/page2a'>Page 2A</a></li>
+        <li><a href='/page3a'>Page 3A</a></li>
+        <li><a href='/page1b'>Page 1B</a></li>
+        <li><a href='/page2b'>Page 2B</a></li>
+        <li><a href='/page3b'>Page 3B</a></li>
+        <li><a href='/help'>HELP</a></li>
+    </ul>
+</header>
 
-    <h1>Focused View of Climate Change by Weather Station</h1>
+<h1>Focused View of Climate Change by Weather Station</h1>
 
-    <form method=\"get\" action=\"/page2a\">
-    <div class=\"filters\">
-        <div>
-            <label for=\"state\">State:</label>
-            <select name=\"state\">
-                {state_dropdown_html}
-            </select>
-        </div>
-        <div>
-            <label>Start Latitude:</label>
-            <input type=\"text\" name=\"lat_start\" value=\"{lat_start}\">
-        </div>
-        <div>
-            <label>End Latitude:</label>
-            <input type=\"text\" name=\"lat_end\" value=\"{lat_end}\">
-        </div>
-        <div>
-            <label>Climate Metric:</label>
-            <select name=\"metric\">
-                {metric_dropdown_html}
-            </select>
-        </div>
-        <div>
-            <button type=\"submit\">Filter</button>
-        </div>
+<form method='get' action='/page2a'>
+<div class='filters'>
+    <div>
+        <label for='state'>State:</label>
+        <select name='state'>
+            {state_dropdown_html}
+        </select>
     </div>
-    </form>
+    <div>
+        <label>Start Latitude:</label>
+        <input type='text' name='lat_start' value='{lat_start}'>
+    </div>
+    <div>
+        <label>End Latitude:</label>
+        <input type='text' name='lat_end' value='{lat_end}'>
+    </div>
+    <div>
+        <label>Climate Metric:</label>
+        <select name='metric'>
+            {metric_dropdown_html}
+        </select>
+    </div>
+    <div>
+        <button type='submit'>Filter</button>
+    </div>
+</div>
+</form>
 
-    <div class=\"region-header\">{state}</div>
-    <table>
-        <thead>
-            <tr><th>Site Name</th><th>Region</th><th>Latitude</th></tr>
-        </thead>
-        <tbody>{station_table}</tbody>
-    </table>
+<div class='region-header'>{state}</div>
+<table>
+    <thead>
+        <tr><th>Site Name</th><th>Region</th><th>Latitude</th></tr>
+    </thead>
+    <tbody>{station_table}</tbody>
+</table>
 
-    <div class=\"region-header\">{state}</div>
-    <table>
-        <thead>
-            <tr><th>Region</th><th>Number Weather Stations</th><th>Average {metric}</th></tr>
-        </thead>
-        <tbody>{summary_table}</tbody>
-    </table>
+<div class='region-header'>{state}</div>
+<table>
+    <thead>
+        <tr><th>Region</th><th>Number Weather Stations</th><th>Average {metric}</th></tr>
+    </thead>
+    <tbody>{summary_table}</tbody>
+</table>
 
-    <footer>
-        <p>FAQ: For more info visit our <a href=\"/faq\">FAQ Page</a>.</p>
-    </footer>
+<footer>
+    <p>FAQ: For more info visit our <a href='/faq'>FAQ Page</a>.</p>
+</footer>
 
 </body>
 </html>
