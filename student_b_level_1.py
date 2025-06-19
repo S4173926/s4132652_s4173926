@@ -3,13 +3,11 @@ import pyhtml
 def get_page_html(form_data):
     print("About to return home page...")
 
-    # Fetch members and personas from the database
     sql_members = "SELECT * FROM member;"
     members = pyhtml.get_results_from_query("climate.db", sql_members)
     sql_personas = "SELECT * FROM personas;"
     personas = pyhtml.get_results_from_query("climate.db", sql_personas)
 
-    # Start building HTML
     page_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +19,13 @@ def get_page_html(form_data):
     <header>
         <a href="/"><img src="rmit.png" alt="Logo"></a>
         <ul>
+            <li><a href="/">Home</a></li>
             <li><a href="/page2a">Page 2A</a></li>
             <li><a href="/page3a">Page 3A</a></li>
             <li><a href="/page1b">About Us</a></li>
             <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Exploring Climate</a></li>
+            <li><a href="/help">HELP</a></li>
         </ul>
     </header>
     <main>
@@ -49,7 +49,6 @@ def get_page_html(form_data):
             <ul>
     """
 
-    # Add team members
     for member in members:
         student_number, first_name, last_name = member[:3]
         page_html += f"<li>Student Number: {student_number} - {first_name} {last_name}</li>\n"
@@ -60,7 +59,6 @@ def get_page_html(form_data):
                 <h3>Personas</h3>
     """
 
-    # Add personas
     for persona in personas:
         _, name, age, background, goals, needs = persona[:6]
         goals_list = [g.strip() for g in goals.split("*") if g.strip()]

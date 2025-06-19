@@ -1,9 +1,15 @@
 import pyhtml
 def get_page_html(form_data):
+    period = form_data.get("period")
+    period = "" if period is None else period[0]
+    button_period_next = form_data.get("next")
+    button_period_next = "true" if button_period_next is None else button_period_next[0]
+    button_back_period = form_data.get("back_period")
+    button_back_period = "" if button_back_period is None else button_back_period[0]
+    button_back_period_month = form_data.get("back_period_month")
+    button_back_period_month = "" if button_back_period_month is None else button_back_period_month[0]
     print("About to return page 3")
-    #Create the top part of the webpage
-    #Note that the drop down list ('select' HTML element) has been given the name "var_star"
-    #We will use this same name in our code further below to obtain what the user selected.
+
     page_html="""<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -15,25 +21,32 @@ def get_page_html(form_data):
         <header>
         <a href="/"><img src="rmit.png" alt="Logo"></a>
         <ul>
+            <li><a href="/">Home</a></li>
             <li><a href="/page2a">Page 2A</a></li>
             <li><a href="/page3a">Page 3A</a></li>
             <li><a href="/page1b">About Us</a></li>
             <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Exploring Climate</a></li>
+            <li><a href="/help">HELP</a></li>
         </ul>
         </header>
         <div class="container">
             <aside class="sidebar">
                 <h3>Search and Explore Climate Metrics Similarities</h3>
 
-                <form action="/page3b" method="GET">
+                <form action="/page3b" method="GET">"""
+    if button_period_next == "true" or button_back_period == "true" or button_back_period_month == "true":
+        page_html += """
 
                 <label>Period:</label>
-                <select name="period">
+                <select name="period" value="year">
                     <option value="year">Year</option>
                     <option value="month">Month</option>
                 </select>
+                <button name="next" value="false">Next</button>"""
 
+    if period == "year":
+        page_html += """
                 <label>Start Year(1970-2020):</label>
                 <input type="number" name="start_year" min="1970" max="2020" placeholder="2005">
                 <label>End Year(1970-2020):</label>
@@ -45,7 +58,10 @@ def get_page_html(form_data):
                     <option value="2">half total Years</option>
                     <option value="10">decades</option>
                 </select>
+                <button name="back_period" value="true">Back</button>       <button name="next_metrics" value="true">Next</button>"""
 
+    elif period == "month":
+        page_html += """
                 <label>Which Year(1970-2020):</label>
                 <input type="number" name="which_year" min="1970" max="2020" placeholder="1970">
                 <label>Start Month:</label>
@@ -86,6 +102,9 @@ def get_page_html(form_data):
                     <option value="2">half years</option>
                     <option value="3">quarters</option>
                 </select>
+                <button name="back_period_month" value="true">Back</button>       <button name="next_metrics_month" value="true">Next</button>"""
+
+    page_html += """
 
                 <label> Reference Metric:</label>
                 <select name="weather_Metric" id="weather-attributes">

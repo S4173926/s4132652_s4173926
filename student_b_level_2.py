@@ -108,11 +108,13 @@ def get_page_html(form_data):
         <header>
         <a href="/"><img src="rmit.png" alt="Logo"></a>
         <ul>
+            <li><a href="/">Home</a></li>
             <li><a href="/page2a">Page 2A</a></li>
             <li><a href="/page3a">Page 3A</a></li>
             <li><a href="/page1b">About Us</a></li>
             <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Exploring Climate</a></li>
+            <li><a href="/help">HELP</a></li>
         </ul>
         </header>
         <div class="container">
