@@ -2,6 +2,7 @@ import pyhtml
 import datetime
 
 def get_page_html(form_data):
+    filtered_data = []
     sum_month = form_data.get('sum_month')
     if sum_month is None:
         sum_month = "__"
@@ -177,6 +178,9 @@ def get_page_html(form_data):
                 date_in_range = datetime.datetime.strptime(date_in_range, "%Y-%m-%d")
                 date_in_range = date_in_range.date()
                 if start_date <= date_in_range <= end_date:
+                    filtered_data.append(row)
+    filtered_data.sort(key=lambda x: datetime.datetime.strptime(x[1], "%d/%m/%Y"))
+    for row in filtered_data:
                     page_html += f"""
                     <tr>
                         <td>{row[0]}</td>
@@ -233,6 +237,7 @@ def get_page_html(form_data):
                 <input type="number" name="sum_year" min="1970" max="2020" placeholder="1970">
                 <label>Month:</label>
                 <select name="sum_month">
+                    <option value="__">All</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -245,7 +250,6 @@ def get_page_html(form_data):
                     <option value="10">October</option>
                     <option value="11">November</option>
                     <option value="12">December</option>
-                    <option value="__">All</option>
                 </select>
                 <button>Apply</button>
                 </form>
