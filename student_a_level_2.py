@@ -186,12 +186,12 @@ def get_page_html(form_data):
 <header>
     <img src='rmit.png' alt='RMIT Logo'>
     <ul>
-        <li><a href='/'>Page 1A</a></li>
-        <li><a href='/page2a'>Page 2A</a></li>
-        <li><a href='/page3a'>Page 3A</a></li>
-        <li><a href='/page1b'>Page 1B</a></li>
-        <li><a href='/page2b'>Page 2B</a></li>
-        <li><a href='/page3b'>Page 3B</a></li>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/page2a'>Shallow Glance A</a></li>
+        <li><a href='/page3a'>Deep-dive A</a></li>
+        <li><a href='/page1b'>About Us</a></li>
+        <li><a href='/page2b'>Climate Metric</a></li>
+        <li><a href='/page3b'>Exploring Climate</a></li>
         <li><a href='/help'>HELP</a></li>
     </ul>
 </header>
