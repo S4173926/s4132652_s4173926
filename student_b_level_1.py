@@ -20,8 +20,8 @@ def get_page_html(form_data):
         <a href="/"><img src="rmit.png" alt="Logo"></a>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/page2a">Page 2A</a></li>
-            <li><a href="/page3a">Page 3A</a></li>
+            <li><a href="/page2a">Shallow Glance A</a></li>
+            <li><a href="/page3a">Deep-dive A</a></li>
             <li><a href="/page1b">About Us</a></li>
             <li><a href="/page2b">Climate Metric</a></li>
             <li><a href="/page3b">Exploring Climate</a></li>
