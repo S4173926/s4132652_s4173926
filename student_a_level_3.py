@@ -9,6 +9,7 @@ def get_page_html(form_data):
             height: 100%;
             margin: 0;
             display: flex;
+            '
             flex-direction: column;
             font-family: 'Segoe UI', sans-serif;
             background-color: #ffffff;
