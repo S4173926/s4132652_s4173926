@@ -9,7 +9,7 @@ import student_b_level_3
 import page_help
 
 pyhtml.need_debugging_help=True
-
+ 
 #All pages that you want on the site need to be added as below
 pyhtml.MyRequestHandler.pages["/"]      =student_a_level_1; #Page to show when someone accesses "http://localhost/"
 pyhtml.MyRequestHandler.pages["/page2a"]=student_a_level_2; #Page to show when someone accesses "http://localhost/page2a"
