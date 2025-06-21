@@ -3,103 +3,121 @@ def get_page_html(form_data):
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Identify Similar Weather Stations</title>
+    <title>Deep Dive A - Identify Similar Weather Stations</title>
     <style>
-        html, body {
-            height: 100%;
+        * {
+            box-sizing: border-box;
+        }
+        body {
             margin: 0;
-            display: flex;
-            '
-            flex-direction: column;
             font-family: 'Segoe UI', sans-serif;
             background-color: #ffffff;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         header {
             background: linear-gradient(to right, #0077b6, #00b4d8);
             color: white;
-            height: 12vh;
+            padding: 12px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
         }
         header img {
-            height: 40px;
+            height: 45px;
         }
-        header ul {
+        nav ul {
             list-style: none;
             display: flex;
             margin: 0;
             padding: 0;
         }
-        header li {
+        nav li {
             margin: 0 10px;
         }
-        header a {
+        nav a {
             color: white;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 6px;
         }
-        header a:hover {
-            text-decoration: underline;
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         h1 {
             text-align: center;
-            margin: 30px 0 20px;
-            font-size: 2.4em;
-            color: #0077b6;
+            margin: 30px 0 10px;
+            font-size: 2em;
+            color: #005b96;
         }
-        .filters {
-            width: 85%;
-            margin: 0 auto 30px auto;
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .form-box {
+            flex: 1 1 300px;
+            background-color: #eaf6fc;
             padding: 25px;
             border-radius: 12px;
-            background: #f1f9ff;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
-        .filters div {
-            display: flex;
-            flex-direction: column;
-            min-width: 180px;
-        }
-        .filters label {
-            font-weight: bold;
+        .form-box label {
+            display: block;
             margin-bottom: 5px;
+            font-weight: 600;
         }
-        .filters select, .filters input {
+        .form-box select, .form-box input {
+            width: 100%;
             padding: 10px;
+            margin-bottom: 15px;
             border-radius: 8px;
             border: 1px solid #ccc;
         }
-        .filters button {
-            margin-top: auto;
-            padding: 10px 20px;
-            background: #0077b6;
+        .form-box button {
+            width: 100%;
+            background-color: #0077b6;
             color: white;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
             font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
         }
+        .form-box button:hover {
+            background-color: #005b96;
+        }
+        .table-box {
+            flex: 1 1 600px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            overflow-x: auto;
+        }
         table {
-            width: 85%;
-            margin: 0 auto 40px auto;
+            width: 100%;
             border-collapse: collapse;
-            background: #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            margin-top: 10px;
         }
         th, td {
             padding: 12px;
-            border-bottom: 1px solid #ccc;
-            text-align: left;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
         }
         th {
             background-color: #e0f3ff;
             color: #003f63;
+        }
+        td strong {
+            color: #0077b6;
         }
         footer {
             margin-top: auto;
@@ -107,7 +125,7 @@ def get_page_html(form_data):
             color: white;
             text-align: center;
             padding: 20px;
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
         footer a {
             color: #ffeb3b;
@@ -122,68 +140,74 @@ def get_page_html(form_data):
 
 <header>
     <img src="rmit.png" alt="RMIT Logo">
-    <ul>
-        <li><a href="/">Page 1A</a></li>
-        <li><a href="/page2a">Page 2A</a></li>
-        <li><a href="/page3a">Page 3A</a></li>
-        <li><a href="/page1b">Page 1B</a></li>
-        <li><a href="/page2b">Page 2B</a></li>
-        <li><a href="/page3b">Page 3B</a></li>
-        <li><a href="/help">HELP</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="/">Page 1A</a></li>
+            <li><a href="/page2a">Page 2A</a></li>
+            <li><a href="/page3a">Page 3A</a></li>
+            <li><a href="/page1b">Page 1B</a></li>
+            <li><a href="/page2b">Page 2B</a></li>
+            <li><a href="/page3b">Page 3B</a></li>
+            <li><a href="/help">HELP</a></li>
+        </ul>
+    </nav>
 </header>
 
 <h1>Identify Similar Weather Stations</h1>
 
-<div class="filters">
-    <div>
+<div class="container">
+
+    <div class="form-box">
         <label>Time Periods</label>
-        <select><option>2005 to 2015</option></select>
-    </div>
-    <div>
+        <select>
+            <option>2005 to 2015</option>
+        </select>
+
         <label>Reference Station</label>
-        <select><option>Melbourne Airport</option></select>
-    </div>
-    <div>
+        <select>
+            <option>Melbourne Airport</option>
+        </select>
+
         <label>Number of Stations</label>
         <input type="number" value="2">
-    </div>
-    <div>
-        <label>&nbsp;</label>
+
         <button>FIND</button>
     </div>
-</div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Weather Station</th>
-            <th>Average Temp (2005–2009)</th>
-            <th>Average Temp (2010–2015)</th>
-            <th>% Change</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Melbourne Airport (selected)</strong></td>
-            <td>22.5 °C</td>
-            <td>22.7 °C</td>
-            <td>+0.38%</td>
-        </tr>
-        <tr>
-            <td>Ballarat</td>
-            <td>17.2 °C</td>
-            <td>17.6 °C</td>
-            <td>+0.23%</td>
-        </tr>
-        <tr>
-            <td>Bendigo</td>
-            <td>16.9°C</td>
-            <td>17.0°C</td>
-            <td>+0.29%</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Weather Station</th>
+                    <th>Avg Temp (2005–2009)</th>
+                    <th>Avg Temp (2010–2015)</th>
+                    <th>% Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Melbourne Airport (selected)</strong></td>
+                    <td>22.5 °C</td>
+                    <td>22.7 °C</td>
+                    <td>+0.38%</td>
+                </tr>
+                <tr>
+                    <td>Ballarat</td>
+                    <td>17.2 °C</td>
+                    <td>17.6 °C</td>
+                    <td>+0.23%</td>
+                </tr>
+                <tr>
+                    <td>Bendigo</td>
+                    <td>16.9 °C</td>
+                    <td>17.0 °C</td>
+                    <td>+0.29%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 <footer>
     <p>FAQ: For more info visit our <a href="/faq">FAQ Page</a>.</p>
