@@ -6,8 +6,12 @@ def get_page_html(form_data):
     button_period_next = "true" if button_period_next is None else button_period_next[0]
     button_back_period = form_data.get("back_period")
     button_back_period = "" if button_back_period is None else button_back_period[0]
-    button_back_period_month = form_data.get("back_period_month")
-    button_back_period_month = "" if button_back_period_month is None else button_back_period_month[0]
+    start_year = form_data.get("start_year")
+    start_year = "" if start_year is None else start_year[0]
+    end_year = form_data.get("end_year")
+    end_year = "" if end_year is None else end_year[0]
+    years_grouped = form_data.get("years_grouped")
+    years_grouped = "" if years_grouped is None else years_grouped[0]
     print("About to return page 3")
 
     page_html="""<!DOCTYPE html>
@@ -35,7 +39,7 @@ def get_page_html(form_data):
                 <h3>Search and Explore Climate Metrics Similarities</h3>
 
                 <form action="/page3b" method="GET">"""
-    if button_period_next == "true" or button_back_period == "true" or button_back_period_month == "true":
+    if button_period_next == "true" or button_back_period == "true":
         page_html += """
 
                 <label>Period:</label>
@@ -58,8 +62,35 @@ def get_page_html(form_data):
                     <option value="2">half total Years</option>
                     <option value="10">decades</option>
                 </select>
-                <button name="back_period" value="true">Back</button>       <button name="next_metrics" value="true">Next</button>"""
 
+                <label> Reference Metric:</label>
+                <select name="weather_Metric" id="weather-attributes">
+                    <option value="Precipitation">Precipitation</option>
+                    <option value="RainDaysNum">RainDaysNum</option>
+                    <option value="Evaporation">Evaporation</option>
+                    <option value="EvapDaysNum">EvapDaysNum</option>
+                    <option value="Sunshine">Sunshine</option>
+                    <option value="Temp">Average Temperature</option>
+                    <option value="Okta">Cloud Cover</option>
+                </select>
+
+                <label>Compare Metric:</label>
+                <label for="precipitation">Precipitation</label>
+                <input type="checkbox" name="compare_Metric_Precipitation" value="Precipitation">
+                <label for="rain_days_num">Rain Days Number</label>
+                <input type="checkbox" name="compare_Metric_RainDaysNum" value="RainDaysNum">
+                <label for="evaporation">Evaporation</label>
+                <input type="checkbox" name="compare_Metric_Evaporation" value="Evaporation">
+                <label for="evap_days_num">Evaporation Days Number</label>
+                <input type="checkbox" name="compare_Metric_EvapDaysNum" value="EvapDaysNum">
+                <label for="sunshine">Sunshine</label>
+                <input type="checkbox" name="compare_Metric_Sunshine" value="Sunshine">
+                <label for="okta">Cloud Cover</label>
+                <input type="checkbox" name="compare_Metric_Okta" value="Okta">
+                <label for="average_temperature">Average Temperature</label>
+                <input type="checkbox" name="compare_Metric_Temp" value="Temp">
+                <button name="back_period" value="true">Back</button>    <button>Apply</button>"""
+        
     elif period == "month":
         page_html += """
                 <label>Which Year(1970-2020):</label>
@@ -102,9 +133,6 @@ def get_page_html(form_data):
                     <option value="2">half years</option>
                     <option value="3">quarters</option>
                 </select>
-                <button name="back_period_month" value="true">Back</button>       <button name="next_metrics_month" value="true">Next</button>"""
-
-    page_html += """
 
                 <label> Reference Metric:</label>
                 <select name="weather_Metric" id="weather-attributes">
@@ -132,7 +160,10 @@ def get_page_html(form_data):
                 <input type="checkbox" name="compare_Metric_Okta" value="Okta">
                 <label for="average_temperature">Average Temperature</label>
                 <input type="checkbox" name="compare_Metric_Temp" value="Temp">
-                <button>Apply</button>
+                <button name="back_period" value="true">Back</button>  <button>Apply</button>"""
+        
+    page_html += """
+
                 </form>
             </aside>
             <main class="main">
